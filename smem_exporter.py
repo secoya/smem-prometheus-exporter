@@ -175,6 +175,5 @@ def main():
         if now - last > update_interval:
             update_readings()
             last = time.time()
-        break
 
 main()
