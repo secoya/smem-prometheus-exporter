@@ -156,21 +156,25 @@ from prometheus_client import make_wsgi_app
 from wsgiref.simple_server import make_server
 import time
 
-# TODO: Configurable options, including port
-update_interval = 10
+def main():
+    # TODO: Configurable options, including port
+    update_interval = 30
 
-app = make_wsgi_app()
-httpd = make_server('0.0.0.0', 8172, app)
-print "Starting HTTPD on 0.0.0.0:8172"
-last = time.time()
-update_readings()
-while True:
-    # Timeout handle_requests every second, to check whether we need to update
-    # our readings.
-    httpd.timeout = 1
-    httpd.handle_request()
-    now = time.time()
-    # Only update every 'update_interval' seconds
-    if now - last > update_interval:
-        update_readings()
-        last = time.time()
+    app = make_wsgi_app()
+    httpd = make_server('0.0.0.0', 8172, app)
+    print "Starting HTTPD on 0.0.0.0:8172"
+    last = time.time()
+    update_readings()
+    while True:
+        # Timeout handle_requests every second, to check whether we need to update
+        # our readings.
+        httpd.timeout = update_interval
+        httpd.handle_request()
+        now = time.time()
+        # Only update every 'update_interval' seconds
+        if now - last > update_interval:
+            update_readings()
+            last = time.time()
+        break
+
+main()
