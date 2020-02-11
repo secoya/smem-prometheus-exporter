@@ -1,6 +1,10 @@
 # Project specific ignores
 smem/*
 smem-*.tar.gz
+/smem.py
+/bin
+/include
+/local
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
