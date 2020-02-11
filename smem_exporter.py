@@ -147,9 +147,9 @@ def export_system():
 def update_readings():
     # print "Updating readings..."
     export_pids()
-    export_users()
-    export_maps()
-    export_system()
+    # export_users()
+    # export_maps()
+    # export_system()
     # print "OK"
 
 from prometheus_client import make_wsgi_app
